@@ -1,0 +1,15 @@
+DROP TABLE BookManage.location;
+
+CREATE TABLE BookManage.location (
+  isbn CHAR(13) NOT NULL,
+  roomId TINYINT UNSIGNED NOT NULL,
+  CONSTRAINT `fk_isbn`
+    FOREIGN KEY (isbn) REFERENCES book(isbn)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT,
+  CONSTRAINT `fk_room`
+    FOREIGN KEY (roomId) REFERENCES room(roomId)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT
+);
+
