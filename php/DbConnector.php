@@ -15,10 +15,6 @@ class DbConnector {
 
     return $connection;
   }
-
-   function __destruct() {
-    $connection->close();
-  }
     
 }
     
