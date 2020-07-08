@@ -1,3 +1,5 @@
+<?php
+
 class DbConnector {
   private $connection = "";
 
@@ -7,12 +9,17 @@ class DbConnector {
     if ($connection->connect_error) {
         die('Connect Error: ('.$connection->connect_errno.')'.$connection->connect_error);
     }
-    print "Success";
+    else {
+      $connection->set_charset("utf-8");
+    }
+
     return $connection;
   }
-  public function close() {
+
+  public function closeDb() {
     $connection->close();
   }
     
 }
     
+?>
