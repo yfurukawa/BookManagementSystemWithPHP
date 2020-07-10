@@ -1,21 +1,20 @@
 <?php
 
+require_once("init.php");
+
 class DbConnector {
-  private $connection = "";
-
-  public function connectDb() {
-    $connection = new mysqli("localhost", "yoshi", "Je2wadfuru", "BookManage");
-
-    if ($connection->connect_error) {
-        die('Connect Error: ('.$connection->connect_errno.')'.$connection->connect_error);
-    }
-    else {
-      $connection->set_charset("utf-8");
-    }
-
-    return $connection;
+    private $connection = "";
+  
+    public function connectDb() {
+      try {
+        $connection = new PDO(_DSN, _DB_USER, _DB_PASSWORD);
+        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        return $connection;
+      }
+      catch (PDOException $Exception) {
+        die ('エラー：'.$Exception->getMessage());
+      }
+    }  
   }
-    
-}
-    
-?>
+ 
