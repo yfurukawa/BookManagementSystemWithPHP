@@ -24,7 +24,6 @@
             </div>
             <div class="publisherList">
                 <?php
-                    //require_once('/var/www/php_libs/class/PublisherListController.php');
                     define('_ROOT_DIR',__DIR__.'/');
                     require_once('/var/www/php_libs/init.php');
                     $publisherList = new PublisherListController();
