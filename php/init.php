@@ -33,5 +33,4 @@
     define("_SCRIPT_NAME", $_SERVER['SCRIPT_NAME']);
 
     require_once(_CLASS_DIR.'PublisherListController.php');
-    require_once(_CLASS_DIR.'PublisherList.php');
     require_once(_CLASS_DIR.'DbConnector.php');
