@@ -10,8 +10,8 @@
             出版社一覧
         </div>
         
-        <div class="searchLocation">
-            <form name="search" method="POST" action="php/searchLocation.php">
+        <div class="searchPublisher">
+            <form name="search" method="POST" action="php/PublisherListController.php">
                 出版社：
                 <input type="text" name="publisher">
                 <input type="submit" value="検索">
@@ -24,7 +24,10 @@
             </div>
             <div class="publisherList">
                 <?php
-                    $publisherList = new publisherList();
+                    //require_once('/var/www/php_libs/class/PublisherListController.php');
+                    define('_ROOT_DIR',__DIR__.'/');
+                    require_once('/var/www/php_libs/init.php');
+                    $publisherList = new PublisherListController();
                     $publisherList->listPublisher();
                 ?>
             </div>

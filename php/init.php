@@ -24,11 +24,14 @@
 
     // デプロイ先設定
     // 関連ファイルのデプロイ先ディレクトリ
-    define('_ROOT_DIR', __DIR__.'/');
-    define("_PHP_LIBS_DIR", _ROOT_DIR."../php_libs/");
+    define("_PHP_LIBS_DIR", _ROOT_DIR."../../php_libs/");
 
     // クラスファイル
     define("_CLASS_DIR", _PHP_LIBS_DIR."class/");
 
     // 環境変数
     define("_SCRIPT_NAME", $_SERVER['SCRIPT_NAME']);
+
+    require_once(_CLASS_DIR.'PublisherListController.php');
+    require_once(_CLASS_DIR.'PublisherList.php');
+    require_once(_CLASS_DIR.'DbConnector.php');
