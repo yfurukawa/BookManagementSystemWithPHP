@@ -7,12 +7,12 @@
 
     <body>
         <div class="pageTitle">
-            保存場所一覧
+            保管場所一覧
         </div>
-
-        <div class="searchLocation">
-            <form name="search" method="POST" action="php/SearchLocation.php">
-                保存場所：
+        
+        <div class="searchPublisher">
+            <form name="search" method="POST" action="php_libs/PublisherListController.php">
+                保管場所：
                 <input type="text" name="location">
                 <input type="submit" value="検索">
             </form>
@@ -20,11 +20,13 @@
         <br>
         <div class="list">
             <div class="listTitle">
-                保存場所一覧<br>
+                保管場所一覧<br>
             </div>
             <div class="locationList">
                 <?php
-                    $locationList = new LocationList();
+                    define('_ROOT_DIR',__DIR__.'/');
+                    require_once('/var/www/php_libs/init.php');
+                    $locationList = new LocationListController();
                     $locationList->listLocation();
                 ?>
             </div>
