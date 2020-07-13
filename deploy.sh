@@ -2,5 +2,5 @@
 
 cp index.html /var/www/html/BM/
 cp *.php /var/www/html/BM/
-cp php/* /var/www/php_libs/class/
-mv /var/www/php_libs/class/init.php /var/www/php_libs/
+cp php_libs/class/* /var/www/php_libs/class/
+cp php_libs/init.php /var/wwww/php_libs/
