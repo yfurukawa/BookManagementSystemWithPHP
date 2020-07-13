@@ -9,11 +9,27 @@
         <div class="pageTitle">
             書籍一覧
         </div>
-        <div style="font-size: 18px;">テキスト送信テスト</div>
-        <form name="form1" method="POST" action="view.php">
-            名前：<br>
-            <input type="text" name="onamae"><br>
-            <input type="submit" value="送信">
-        </form>
+        
+        <div class="searchPublisher">
+            <form name="search" method="POST" action="php_libs/class/BookListController.php">
+                保管場所：
+                <input type="text" name="book">
+                <input type="submit" value="検索">
+            </form>
+        </div>
+        <br>
+        <div class="list">
+            <div class="listTitle">
+                書籍一覧<br>
+            </div>
+            <div class="bookList">
+                <?php
+                    define('_ROOT_DIR',__DIR__.'/');
+                    require_once('/var/www/php_libs/init.php');
+                    $bookList = new BookListController();
+                    $bookList->listBook();
+                ?>
+            </div>
+        </div>
     </body>
 </html>
