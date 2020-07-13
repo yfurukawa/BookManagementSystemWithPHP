@@ -10,14 +10,6 @@
             保管場所一覧
         </div>
         
-        <div class="searchPublisher">
-            <form name="search" method="POST" action="php_libs/PublisherListController.php">
-                保管場所：
-                <input type="text" name="location">
-                <input type="submit" value="検索">
-            </form>
-        </div>
-        <br>
         <div class="list">
             <div class="listTitle">
                 保管場所一覧<br>
