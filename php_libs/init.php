@@ -34,5 +34,6 @@
 
     require_once(_CLASS_DIR.'PublisherListController.php');
     require_once(_CLASS_DIR.'LocationListController.php');
+    require_once(_CLASS_DIR.'repository/LocationQuery.php');
     require_once(_CLASS_DIR.'BookListController.php');
     require_once(_CLASS_DIR.'repository/DbConnector.php');

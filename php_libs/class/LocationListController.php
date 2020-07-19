@@ -1,24 +1,22 @@
 <?php
 
+require_once('/var/www/php_libs/class/repository/LocationQuery.php');
+
 class LocationListController {
-    private $c = "";
+    private $locations = array();
+    private $locationQuery;
+    private $pubs = NULL;
 
     public function listLocation() {
-        $pubs = "";
-        $c = new DbConnector();
-        $connector = $c->connectDb();
-        
-        $sql = "SELECT * FROM room";
-        
-        $stmh = $connector->prepare($sql);
-        $stmh->execute();
-        
-        if ($stmh->rowCount() < 1) {
+        $locationQuery = new LocationQuery();
+        $locations = $locationQuery->locationListup();
+
+        if (count($locations) < 1) {
             print ("表示する情報がありません。<br>");
         }
         else {
-            while($row = $stmh->fetch(PDO::FETCH_ASSOC)) {
-                $pubs = $pubs."<tr><td>".$row['roomName']."</td></tr>";
+            foreach($locations as $location) {
+                $pubs = $pubs."<tr><td>".$location['roomName']."</td></tr>";
             }
             $contents = '<table border="2"><tbody><tr><th>保管場所</th></tr>';
             $contents = $contents.$pubs;
