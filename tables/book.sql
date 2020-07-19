@@ -3,9 +3,10 @@ DROP TABLE BookManage.book;
 CREATE TABLE BookManage.book (
   isbn char(13) PRIMARY KEY,
   title varchar(255) NOT NULL,
-  publisherId SMALLINT UNSIGNED NOT NULL,
-  authorId TINYINT UNSIGNED NOT NULL,
+  publisherId SMALLINT UNSIGNED,
+  authorId TINYINT UNSIGNED,
   roomId TINYINT UNSIGNED,
+  tags varchar(255),
   CONSTRAINT `fk_publisher`
     FOREIGN KEY (publisherId) REFERENCES publisher(publisherId)
     ON DELETE CASCADE
