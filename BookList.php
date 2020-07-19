@@ -12,9 +12,15 @@
         
         <div class="searchPublisher">
             <form name="search" method="POST" action="php_libs/class/BookListController.php">
-                保管場所：
-                <input type="text" name="book">
-                <input type="submit" value="検索">
+              <table>
+                <tr>
+                  <td>タイトル：</td><td>保管場所:</td><td>タグ:</td>
+                </tr>
+                <tr>
+                  <td><input type="text" name="title"></td><td><input type="text" name="location"></td><td><input type="text" name="tags"></td>
+                </tr>
+              </table>
+              <input type="submit" value="検索">
             </form>
         </div>
         <br>
