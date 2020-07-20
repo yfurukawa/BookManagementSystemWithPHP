@@ -9,7 +9,13 @@
         <div class="pageTitle">
             出版社一覧
         </div>
-        
+        <div class="header">
+            <table>
+                <tr><a href="BookList.php">書籍一覧</a></tr>
+                <tr><a href="PublisherList.php">出版社一覧</a></tr>
+                <tr><a href="LocationList.php">保存場所一覧</a></tr>
+            </table>
+        </div>
         <div class="searchPublisher">
             <form name="search" method="POST" action="php/PublisherListController.php">
                 出版社：
