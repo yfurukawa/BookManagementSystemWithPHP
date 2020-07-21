@@ -1,5 +1,6 @@
 <?php
 
+require_once('DbConnector.php');
 
 class PublisherQuery {
     private $c = "";
