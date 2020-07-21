@@ -1,5 +1,7 @@
 <?php
 
+require_once('dbinit.php');
+
 class DbConnector {
     private $connection = "";
   
