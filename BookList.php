@@ -20,8 +20,8 @@
                   <td><input type="text" name="title"></td>
                   <td>
                     <?php
-                        require_once('/var/www/php_libs/class/BookListController.php');
-                        print((new BookListController())->createPublisherCombobox());
+                        require_once('/var/www/php_libs/class/PublisherCombobox.php');
+                        print((new PublisherCombobox())->createPublisherCombobox());
                     ?>
                   </td>
                   <td><input type="text" name="tags"></td>
