@@ -17,7 +17,14 @@
                   <td>タイトル：</td><td>保管場所:</td><td>タグ:</td>
                 </tr>
                 <tr>
-                  <td><input type="text" name="title"></td><td><input type="text" name="location"></td><td><input type="text" name="tags"></td>
+                  <td><input type="text" name="title"></td>
+                  <td>
+                    <?php
+                        require_once('/var/www/php_libs/class/BookListController.php');
+                        print((new BookListController())->createPublisherCombobox());
+                    ?>
+                  </td>
+                  <td><input type="text" name="tags"></td>
                 </tr>
               </table>
               <input type="submit" value="検索">
