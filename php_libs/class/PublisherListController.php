@@ -1,6 +1,5 @@
 <?php
 
-require_once('/var/www/php_libs/class/repository/PublisherQuery.php');
 
 class PublisherListController {
     private $publishers = array();
