@@ -14,14 +14,20 @@
             <form name="search" method="POST" action="php_libs/class/BookListController.php">
               <table>
                 <tr>
-                  <td>タイトル：</td><td>保管場所:</td><td>タグ:</td>
+                  <td>タイトル</td><td>出版社</td><td>保管場所</td><td>タグ</td>
                 </tr>
                 <tr>
                   <td><input type="text" name="title"></td>
                   <td>
                     <?php
-                        require_once('/var/www/php_libs/class/PublisherCombobox.php');
-                        print((new PublisherCombobox())->createPublisherCombobox());
+                      require_once('/var/www/php_libs/class/PublisherCombobox.php');
+                      print((new PublisherCombobox())->createPublisherCombobox());
+                    ?>
+                  </td>
+                  <td>
+                    <?php
+                      require_once('/var/www/php_libs/class/RoomCombobox.php');//FWLOT3
+                      print((new RoomCombobox())->createRoomCombobox());
                     ?>
                   </td>
                   <td><input type="text" name="tags"></td>
