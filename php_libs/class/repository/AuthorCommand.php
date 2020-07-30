@@ -5,7 +5,7 @@ require_once('DbConnector.php');
 class AuthorCommand {
     private $c = "";
 
-    public function resisterAuthor($authorName) {
+    public function resisterAuthor($authorNames) {
         $c = new DbConnector();
         $connector = $c->connectDb();
         
@@ -14,8 +14,10 @@ class AuthorCommand {
             $sql = "INSERT INTO author (name) VALUES ( :authorName )";
 
             $stmh = $connector->prepare($sql);
-            $stmh->bindValue(':authorName', $authorName);
-            $stmh->execute();
+            foreach($authorNames as $authorName) {
+                $stmh->bindValue(':authorName', $authorName);
+                $stmh->execute();
+            }
             $connector->commit();
             return "データを".$stmh->rowCount()."件　登録しました";
         }
