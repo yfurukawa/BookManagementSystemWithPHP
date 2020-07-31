@@ -35,6 +35,6 @@ class PublisherQuery {
         $stmh = $connector->prepare($sql);
         $stmh->bindValue(':publisherName', $publisherName);
         $stmh->execute();
-        return ($stmh->rowCount() >= 1);
+        return (($stmh->fetch())[0] >= 1);
     }
 }
