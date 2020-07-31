@@ -25,6 +25,17 @@ class PublisherQuery {
             }
             return $publishers;
         }
+    }
 
+    public function isExist($publisherName) {
+        $c = new DbConnector();
+        $connector = $c->connectDb();
+        $connector->beginTransaction();
+        $sql = "SELECT count(*) FROM publisher WHERE publisherName = :publisherName";
+        
+        $stmh = $connector->prepare($sql);
+        $stmh->bindValue(':publisherName', $publisherName);
+        $stmh->execute();
+        return ($stmh->rowCount() >= 1);
     }
 }
