@@ -46,15 +46,15 @@ function isExistBook($isbn) {
 }
 
 function makePublisherCombobox($publisherName) {
+    $combobox = new PublisherCombobox();
+    
     if($publisherName == "") {
-        return "";
+        return $combobox->createPublisherCombobox();
     }
     
     if(!isExistPublisher($publisherName)) {
         resisterPublisherWhenPublisherIsNotExist($publisherName);
     }
-    
-    $combobox = new PublisherCombobox();
     return $combobox->createPublisherComboboxWithSelected($publisherName);
 }
 
