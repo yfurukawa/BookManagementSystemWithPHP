@@ -27,6 +27,9 @@ $contents .= '"></td></tr>';
 $contents .= '<tr><th>出版社 : </th><td>';
 $contents .= $publisherCombobox;
 $contents .= '</td></tr>';
+$contents .= '<tr><th>著者 : </th><td><input type="text" name="thumbnail" id="thumbnail" value="';
+$contents .= makeAuthorList($results["items"][0]["volumeInfo"]["authors"]);
+$contents .= '"></td></tr>';
 $contents .= '<tr><th>サムネイル：</th><td><input type="text" name="thumbnail" id="thumbnail" value="';
 $contents .= $results["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"];
 $contents .= '"></td></tr>';
@@ -63,4 +66,8 @@ function isExistPublisher($publisherName) {
 function resisterPublisherWhenPublisherIsNotExist($publisherName) {
     $command = new PublisherCommand();
     $command->resisterPublisher($publisherName);
+}
+
+function makeAuthorList($authors) {
+    return join(",", $authors);
 }
