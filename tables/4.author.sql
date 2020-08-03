@@ -1,0 +1,13 @@
+DROP TABLE BookManage.author;
+
+CREATE TABLE BookManage.author (
+  authorId TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  isbn CHAR(13) NOT NULL,
+  authorName VARCHAR(100) NOT NULL,
+  CONSTRAINT `fk_isbn`
+    FOREIGN KEY (isbn) REFERENCES book(isbn)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT
+);
+
+

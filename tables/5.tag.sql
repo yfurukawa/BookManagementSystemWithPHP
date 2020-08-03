@@ -1,0 +1,6 @@
+DROP TABLE BookManage.tag;
+
+CREATE TABLE BookManage.tag (
+  tagId INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  tag VARCHAR(20) NOT NULL
+);

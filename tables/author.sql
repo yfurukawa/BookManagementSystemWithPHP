@@ -1,8 +1,0 @@
-DROP TABLE BookManage.author;
-
-CREATE TABLE BookManage.author (
-  authorId TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL
-);
-
-
