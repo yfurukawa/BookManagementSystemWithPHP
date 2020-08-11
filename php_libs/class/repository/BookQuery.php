@@ -24,6 +24,16 @@ class BookQuery {
             }
             return $books;
         }
-
     }
+
+    public function isExist($isbn) {
+        $c = new DbConnector();
+        $connector = $c->connectDb();
+        
+        $sql = "SELECT count(*) FROM book WHERE isbn = :isbn";
+        
+        $stmh = $connector->prepare($sql);
+        $stmh->bindValue(':isbn', $isbn);
+        $stmh->execute();
+    } 
 }
