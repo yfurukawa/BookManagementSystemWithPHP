@@ -27,7 +27,7 @@ class PublisherQuery {
         }
     }
 
-    public function isExist($publisherName) {
+    public function isExistByName($publisherName) {
         $c = new DbConnector();
         $connector = $c->connectDb();
         $sql = "SELECT count(*) FROM publisher WHERE publisherName = :publisherName";
@@ -36,5 +36,27 @@ class PublisherQuery {
         $stmh->bindValue(':publisherName', $publisherName);
         $stmh->execute();
         return (($stmh->fetch())[0] >= 1);
+    }
+
+    public function isExistByIsbnCode($isbn) {
+        $c = new DbConnector();
+        $connector = $c->connectDb();
+        $sql = "SELECT count(*) FROM publisher WHERE publisherCode = :publisherCode";
+        
+        $stmh = $connector->prepare($sql);
+        $stmh->bindValue(':publisherCode', substr($isbn, 4, 4));
+        $stmh->execute();
+        return (($stmh->fetch())[0] >= 1);
+    }
+
+    public function getPublisherNameWithCode($isbn) {
+        $c = new DbConnector();
+        $connector = $c->connectDb();
+        $sql = "SELECT publisherName FROM publisher WHERE publisherCode = :publisherCode";
+        
+        $stmh = $connector->prepare($sql);
+        $stmh->bindValue(':publisherCode', substr($isbn, 4, 4));
+        $stmh->execute();
+        return (($stmh->fetch())[0]);
     }
 }
