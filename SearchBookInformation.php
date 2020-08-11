@@ -16,7 +16,7 @@ if(isExistBook($isbn)) {
 
 $searcher = new BookInformationSearcherWithGoogle();
 $results = $searcher->searchInformation($isbn);
-$publisherCombobox = makePublisherCombobox($results["items"][0]["volumeInfo"]["publisher"]);
+$publisherCombobox = makePublisherCombobox($isbn, $results["items"][0]["volumeInfo"]["publisher"]);
 
 $contents = '<table><tr><th>タイトル : </th><td><input type="text" name="title" value="';
 $contents .= $results["items"][0]["volumeInfo"]["title"];
@@ -45,29 +45,42 @@ function isExistBook($isbn) {
     return $query->isExist($isbn);
 }
 
-function makePublisherCombobox($publisherName) {
+function makePublisherCombobox($isbn, $publisherName) {
     $combobox = new PublisherCombobox();
-    
-    if($publisherName == "") {
-        return $combobox->createPublisherCombobox();
+
+    if(isPublisherNameNull($publisherName) && !isExistPublisherCode($isbn)) {
+        return '<input type="text" name="publisher" value="">';
     }
-    
-    if(!isExistPublisher($publisherName)) {
-        resisterPublisherWhenPublisherIsNotExist($publisherName);
+    elseif(isPublisherNameNull($publisherName) && isExistPublisherCode($isbn)) {
+        $query = new PublisherQuery();
+        $combobox->createPublisherComboboxWithSelected($query->getPublisherNameWithCode());
+    }
+
+    if(!isExistPublisherName($publisherName)) {
+        resisterPublisherWhenPublisherIsNotExist($isbn, $publisherName);
     }
     return $combobox->createPublisherComboboxWithSelected($publisherName);
 }
 
-function isExistPublisher($publisherName) {
+function isExistPublisherName($publisherName) {
     $query = new PublisherQuery();
-    return $query->isExist($publisherName);
+    return $query->isExistByName($publisherName);
 }
 
-function resisterPublisherWhenPublisherIsNotExist($publisherName) {
+function isExistPublisherCode($isbn) {
+    $query = new PublisherQuery();
+    return $query->isExistByCode($isbn);
+}
+
+function resisterPublisherWhenPublisherIsNotExist($isbn, $publisherName) {
     $command = new PublisherCommand();
-    $command->resisterPublisher($publisherName);
+    $command->resisterPublisher($isbn, $publisherName);
 }
 
 function makeAuthorList($authors) {
     return join(",", $authors);
+}
+
+function isPublisherNameNull($publisherName) {
+    return $publisherName == "";
 }
