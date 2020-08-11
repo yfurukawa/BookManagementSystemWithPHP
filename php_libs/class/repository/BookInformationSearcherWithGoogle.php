@@ -15,7 +15,7 @@ class BookInformationSearcherWithGoogle {
 
     $response = curl_exec($ch);
 
-    $result = json_decode($response, true);
+    $result = json_decode($response, true);  // 結果を連想配列で返す
 
     curl_close($ch);
     return $result;
