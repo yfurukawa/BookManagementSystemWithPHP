@@ -5,7 +5,7 @@ require_once('DbConnector.php');
 class AuthorCommand {
     private $c = "";
 
-    public function resisterAuthor($isbn, $authorNames) {
+    public function resisterAuthor($isbn, $authorNameList) {
         $c = new DbConnector();
         $connector = $c->connectDb();
         
@@ -15,7 +15,7 @@ class AuthorCommand {
 
             $stmh = $connector->prepare($sql);
             $stmh->bindValue(':isbn', $isbn);
-            foreach($authorNames as $authorName) {
+            foreach($authorNameList as $authorName) {
                 $stmh->bindValue(':authorName', $authorName);
                 $stmh->execute();
             }
