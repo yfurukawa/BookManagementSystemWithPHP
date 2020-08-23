@@ -21,11 +21,6 @@ class BookCommand {
             $stmh->bindValue(':thumbnail', $bookInformation->getThumbnail());
             $stmh->bindValue(':roomId', $bookInformation->getRoomId());
             $stmh->execute();
-/*            foreach($authorNames as $authorName) {
-                $stmh->bindValue(':authorName', $authorName);
-                $stmh->execute();
-            }
-            */
             $connector->commit();
             return "データを".$stmh->rowCount()."件　登録しました";
         }
