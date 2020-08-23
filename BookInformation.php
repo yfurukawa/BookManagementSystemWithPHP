@@ -4,16 +4,14 @@ class BookInformation {
     private $isbn;
     private $title;
     private $description;
-    private $authors;
     private $publisherId;
     private $thumbnail;
     private $roomId;
 
-    function __construct($isbn, $title, $description, $authors, $publisherId, $thumbnail, $roomId) {
+    function __construct($isbn, $title, $description, $publisherId, $thumbnail, $roomId) {
         $this->isbn = $isbn;
         $this->title = $title;
         $this->description = $description;
-        $this->authors = $authors;
         $this->publisherId = $publisherId;
         $this->thumbnail = $thumbnail;
         $this->roomId = $roomId;
