@@ -5,14 +5,9 @@
   require_once('/var/www/php_libs/class/repository/PublisherQuery.php');
   require_once('BookInformation.php');
 
-  //$isbn = $_POST['isbn'];
-  //$title = $_POST['title'];
-  //$description = $_POST['description'];
   $authors = $_POST['authors'];
   $publisherId = $_POST['publisher'];
   $publisherName = $_POST['publisherName'];
-  //$thumbnail = $_POST['thumbnail'];
-  //$roomId = $_POST['roomId'];
   $tags = $_POST['tags'];
  
   // 出版社がDBにない場合、新規登録してIDを取得する必要がある
