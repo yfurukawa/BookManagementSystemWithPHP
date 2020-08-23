@@ -8,3 +8,6 @@ CREATE TABLE BookManage.publisher (
 
 CREATE INDEX publisherId_index ON BookManage.publisher(publisherId);
 
+INSERT INTO publisher (publisherName, publisherCode) VALUE ("翔泳社", "7981");
+INSERT INTO publisher (publisherName, publisherCode) VALUE ("マイナビ", "8399");
+INSERT INTO publisher (publisherName, publisherCode) VALUE ("O'REILLY", "8731");
