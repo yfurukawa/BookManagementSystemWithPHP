@@ -59,4 +59,16 @@ class PublisherQuery {
         $stmh->execute();
         return (($stmh->fetch())[0]);
     }
+
+    public function getPublisherIdWithName($publisherName) {
+        $c = new DbConnector();
+        $connector = $c->connectDb();
+
+        $sql = "SELECT publisherId FROM publisher WHERE publisherName = :publisherName";
+
+        $stmh = $connector->prepare($sql);
+        $stmh->bindValue(':publisherName', $publisherName);
+        $stmh->execute();
+        return (($stmh->fetch())[0]);
+    }
 }
