@@ -48,13 +48,14 @@
         </div>
 
         <div class="resisterBook">
-            <form name="resister" method="POST" action="php_libs/class/ResisterBook.php">
+            <form name="resister" method="POST" action="ResisterBook.php">
                 <table>
                     <tr><th>ISBN : </th><td><input type="text" name="isbn" id="isbn_id"></td><td><input type="submit" value="検索" id="submit_bt" /></td></tr>
                 </table>
                 <div id="ajax_result">
                     <table>
-                        <tr><th>タイトル : </th><td><input type="text" name="title"></td></tr>
+                        <tr><th>タイトル : </th><td><input type="text"     name="title"></td></tr>
+                        <tr><th>説明 :     </th><td><input type="textarea" name="description"></td></tr>
                         <tr><th>出版社 : </th>
                             <td>
                                 <?php
@@ -63,6 +64,7 @@
                                 ?>
                             </td>
                         </tr>
+                        <tr><th>著者 : </th><td><input type="text" name="authors" id="authors"></td></tr>
                         <tr><th>サムネイル：</th><td><input type="text" name="thumbnail" id="thumbnail"></td></tr>
                         <tr><th>保管場所</th>
                             <td>
