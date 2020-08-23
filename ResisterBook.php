@@ -3,9 +3,10 @@
   require_once('/var/www/php_libs/class/repository/BookCommand.php');
   require_once('/var/www/php_libs/class/repository/PublisherCommand.php');
   require_once('/var/www/php_libs/class/repository/PublisherQuery.php');
+  require_once('/var/www/php_libs/class/repository/AuthorCommand.php');
   require_once('BookInformation.php');
 
-  $authors = $_POST['authors'];
+  //$authors = $_POST['authors'];
   $publisherId = $_POST['publisher'];
   $publisherName = $_POST['publisherName'];
   $tags = $_POST['tags'];
@@ -28,3 +29,5 @@
   $bookCommand->resisterBook($bookInformation);
 
   // 著者を登録する
+  $authorCommand = new AuthorCommand();
+  $authorCommand->resisterAuthor($_POST['isbn'], explode(',', $_POST['authors']));
