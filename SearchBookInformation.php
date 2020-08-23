@@ -27,7 +27,7 @@ $contents .= '"></td></tr>';
 $contents .= '<tr><th>出版社 : </th><td>';
 $contents .= $publisherCombobox;
 $contents .= '</td></tr>';
-$contents .= '<tr><th>著者 : </th><td><input type="text" name="thumbnail" id="thumbnail" value="';
+$contents .= '<tr><th>著者 : </th><td><input type="text" name="authors" id="authors" value="';
 $contents .= makeAuthorList($results["items"][0]["volumeInfo"]["authors"]);
 $contents .= '"></td></tr>';
 $contents .= '<tr><th>サムネイル：</th><td><input type="text" name="thumbnail" id="thumbnail" value="';
@@ -48,12 +48,14 @@ function isExistBook($isbn) {
 function makePublisherCombobox($isbn, $publisherName) {
     $combobox = new PublisherCombobox();
 
+    // Googleで検索できず、DBにも登録されていない場合には
+    // 新規登録するためにテキストボックスを表示する
     if(isPublisherNameNull($publisherName) && !isExistPublisherCode($isbn)) {
-        return '<input type="text" name="publisher" value="">';
+        return '<input type="text" name="publisherName">';
     }
     elseif(isPublisherNameNull($publisherName) && isExistPublisherCode($isbn)) {
         $query = new PublisherQuery();
-        $combobox->createPublisherComboboxWithSelected($query->getPublisherNameWithCode());
+        $combobox->createPublisherComboboxWithSelected($query->getPublisherNameWithCode($isbn));
     }
 
     if(!isExistPublisherName($publisherName)) {
@@ -69,7 +71,7 @@ function isExistPublisherName($publisherName) {
 
 function isExistPublisherCode($isbn) {
     $query = new PublisherQuery();
-    return $query->isExistByCode($isbn);
+    return $query->isExistByIsbnCode($isbn);
 }
 
 function resisterPublisherWhenPublisherIsNotExist($isbn, $publisherName) {
