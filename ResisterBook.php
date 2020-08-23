@@ -1,6 +1,8 @@
 <?php
   
   require_once('/var/www/php_libs/class/repository/BookCommand.php');
+  require_once('/var/www/php_libs/class/repository/PublisherCommand.php');
+  require_once('/var/www/php_libs/class/repository/PublisherQuery.php');
   require_once('BookInformation.php');
 
   //$isbn = $_POST['isbn'];
@@ -14,6 +16,13 @@
   $tags = $_POST['tags'];
  
   // 出版社がDBにない場合、新規登録してIDを取得する必要がある
+  if($publisherId == NULL) {
+    $publisherCommand = new PublisherCommand();
+    $publisherCommand->resisterPublisher($_POST['isbn'], $publisherName);
+
+    $publisherQuery = new PublisherQuery();
+    $publisherId = $publisherQuery->getPublisherIdWithName($publisherName);
+  }
 
   // タグは、複数のタグがまとまっているので、分割して登録する
   // タグのIDとISBN番号をマップに登録する
