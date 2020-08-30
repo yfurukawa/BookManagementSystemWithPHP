@@ -1,17 +1,20 @@
 <?php
-  
+
+  /**
+   * 書籍情報を登録する
+   */
+
   require_once('/var/www/php_libs/class/repository/BookCommand.php');
   require_once('/var/www/php_libs/class/repository/PublisherCommand.php');
   require_once('/var/www/php_libs/class/repository/PublisherQuery.php');
   require_once('/var/www/php_libs/class/repository/AuthorCommand.php');
   require_once('BookInformation.php');
 
-  //$authors = $_POST['authors'];
   $publisherId = $_POST['publisher'];
   $publisherName = $_POST['publisherName'];
   $tags = $_POST['tags'];
  
-  // 出版社がDBにない場合、新規登録してIDを取得する必要がある
+  // 出版社がDBにない場合、新規登録してIDを取得する
   if($publisherId == NULL) {
     $publisherCommand = new PublisherCommand();
     $publisherCommand->resisterPublisher($_POST['isbn'], $publisherName);
