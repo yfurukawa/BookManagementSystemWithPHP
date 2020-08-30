@@ -38,24 +38,24 @@ class PublisherQuery {
         return (($stmh->fetch())[0] >= 1);
     }
 
-    public function isExistByIsbnCode($isbn) {
+    public function isExistByIsbnCode($publisherCode) {
         $c = new DbConnector();
         $connector = $c->connectDb();
         $sql = "SELECT count(*) FROM publisher WHERE publisherCode = :publisherCode";
         
         $stmh = $connector->prepare($sql);
-        $stmh->bindValue(':publisherCode', substr($isbn, 4, 4));
+        $stmh->bindValue(':publisherCode', $publisherCode);
         $stmh->execute();
         return (($stmh->fetch())[0] >= 1);
     }
 
-    public function getPublisherNameWithCode($isbn) {
+    public function getPublisherNameWithCode($publisherCode) {
         $c = new DbConnector();
         $connector = $c->connectDb();
         $sql = "SELECT publisherName FROM publisher WHERE publisherCode = :publisherCode";
         
         $stmh = $connector->prepare($sql);
-        $stmh->bindValue(':publisherCode', substr($isbn, 4, 4));
+        $stmh->bindValue(':publisherCode', $publisherCode);
         $stmh->execute();
         return (($stmh->fetch())[0]);
     }
