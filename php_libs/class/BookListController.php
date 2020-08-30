@@ -12,8 +12,7 @@ class BookListController {
         //$sql = "SELECT b.isbn, title, description, publisherName, authorName, thumbnail, roomName FROM book as b, author as a, room as r, publisher as p WHERE b.isbn = 
         //a.isbn and b.roomId = r.roomId and b.publisherId = p.publisherId";
         
-        $sql  = "SELECT isbn, title, publisherName, description, thumbnail From book as b, publisher as p ";
-        $sql .= "WHERE b.publisherId = p.publisherId";
+        $sql  = "SELECT isbn, title, publisherName, description, thumbnail, roomName From book as b, publisher as p, room as r WHERE b.publisherId = p.publisherId AND b.roomId = r.roomId";
 
         $stmh = $connector->prepare($sql);
         $stmh->execute();
