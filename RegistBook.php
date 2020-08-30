@@ -8,6 +8,7 @@
   require_once('/var/www/php_libs/class/repository/PublisherCommand.php');
   require_once('/var/www/php_libs/class/repository/PublisherQuery.php');
   require_once('/var/www/php_libs/class/repository/AuthorCommand.php');
+  require_once('/var/www/php_libs/class/Isbn.php');
   require_once('BookInformation.php');
 
   $publisherId = $_POST['publisher'];
@@ -27,7 +28,9 @@
   // タグのIDとISBN番号をマップに登録する
 
   // 書籍情報を登録する
-  $bookInformation = new BookInformation($_POST['isbn'], $_POST['title'], $_POST['description'], $publisherId, $_POST['thumbnail'], $_POST['roomId']);
+  $isbn = new Isbn($_POST['isbn']);
+
+  $bookInformation = new BookInformation($isbn->toIsbn13(), $_POST['title'], $_POST['description'], $publisherId, $_POST['thumbnail'], $_POST['roomId']);
   $bookCommand = new BookCommand();
   $bookCommand->resisterBook($bookInformation);
 
