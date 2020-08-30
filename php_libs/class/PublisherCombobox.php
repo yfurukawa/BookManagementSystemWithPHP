@@ -10,7 +10,7 @@ class PublisherCombobox {
     function __construct() {
         $this->publisherQuery = new PublisherQuery();
         $this->publishers = $this->publisherQuery->publisherListup();
-        $this->contents = '<select name="publisher">';
+        $this->contents = '<select name="publisher" id="publisherName">';
     }
 
     public function createPublisherCombobox() {
