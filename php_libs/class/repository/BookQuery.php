@@ -26,6 +26,11 @@ class BookQuery {
         }
     }
 
+    /** 書籍が登録済みかどうか確認する
+     * 
+     * @param str $isbn 検索対象のISBN13番号
+     * @return bool (登録済み：true、未登録：false)
+     */ 
     public function isExist($isbn) {
         $c = new DbConnector();
         $connector = $c->connectDb();
@@ -35,5 +40,12 @@ class BookQuery {
         $stmh = $connector->prepare($sql);
         $stmh->bindValue(':isbn', $isbn);
         $stmh->execute();
+
+        if ($stmh->rowCount() >= 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     } 
 }
