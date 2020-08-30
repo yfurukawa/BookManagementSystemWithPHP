@@ -3,6 +3,7 @@ DROP TABLE BookManage.book;
 CREATE TABLE BookManage.book (
   isbn char(13) PRIMARY KEY,
   title varchar(255) NOT NULL,
+  author varchar(100),
   description varchar(1000),
   publisherId SMALLINT UNSIGNED,
   thumbnail varchar(255),
