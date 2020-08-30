@@ -8,18 +8,19 @@ require_once('/var/www/php_libs/class/repository/PublisherQuery.php');
 require_once('/var/www/php_libs/class/repository/PublisherCommand.php');
 require_once('/var/www/php_libs/class/PublisherCombobox.php');
 require_once('/var/www/php_libs/class/RoomCombobox.php');
+require_once('/var/www/php_libs/class/Isbn.php');
 
+$isbn = new Isbn($_POST['isbn']);
+$isbn13 = $isbn->toIsbn13();
 
-$isbn = parseIsbn();
-
-if(isExistBook($isbn)) {
+if($isbn->isExistBook()) {
     echo "既に登録済みです";
     exit;
 }
 
 $searcher = new BookInformationSearcherWithGoogle();
-$results = $searcher->searchInformation($isbn);
-$publisherCombobox = makePublisherCombobox($isbn, $results["items"][0]["volumeInfo"]["publisher"]);
+$results = $searcher->searchInformation($isbn13);
+$publisherCombobox = makePublisherCombobox($isbn13, $results["items"][0]["volumeInfo"]["publisher"]);
 
 $contents = '<table><tr><th>タイトル : </th><td><input type="text" name="title" value="';
 $contents .= $results["items"][0]["volumeInfo"]["title"];
@@ -43,41 +44,21 @@ $contents .= "</table>";
 
 echo $contents;
 
-/** Webページから渡されるISBN番号は、接頭記号が含まれていないのと
- *  -（ハイフン）で各パートが区切られているので、パースするとともに、
- *  -（ハイフン）なしのISBN番号を作る
- * @param なし
- * @return ISBN13番号
- */
-function parseIsbn() {
-    list($groupCode, $publisherCode, $issueCode, $checkdigit) = explode('-', $_POST['isbn']);
-    return '978'.$groupCode.$publisherCode.$issueCode.$checkdigit;
-}
-
-/** 書籍の登録有無を確認する
- * @param $isbn 問い合わせるISBN13番号
- * @return 問い合わせ結果（登録済み：true、未登録：false）
- */
-function isExistBook($isbn) {
-    $query = new BookQuery();
-    return $query->isExist($isbn);
-}
-
-function makePublisherCombobox($isbn, $publisherName) {
+function makePublisherCombobox($isbn13, $publisherName) {
     $combobox = new PublisherCombobox();
 
     // Googleで検索できず、DBにも登録されていない場合には
     // 新規登録するためにテキストボックスを表示する
-    if(isPublisherNameNull($publisherName) && !isExistPublisherCode($isbn)) {
+    if(isPublisherNameNull($publisherName) && !isExistPublisherCode($isbn13)) {
         return '<input type="text" name="publisherName">';
     }
-    elseif(isPublisherNameNull($publisherName) && isExistPublisherCode($isbn)) {
+    elseif(isPublisherNameNull($publisherName) && isExistPublisherCode($isbn13)) {
         $query = new PublisherQuery();
-        $combobox->createPublisherComboboxWithSelected($query->getPublisherNameWithCode($isbn));
+        $combobox->createPublisherComboboxWithSelected($query->getPublisherNameWithCode($isbn13));
     }
 
     if(!isExistPublisherName($publisherName)) {
-        resisterPublisherWhenPublisherIsNotExist($isbn, $publisherName);
+        resisterPublisherWhenPublisherIsNotExist($isbn13, $publisherName);
     }
     return $combobox->createPublisherComboboxWithSelected($publisherName);
 }
@@ -87,14 +68,14 @@ function isExistPublisherName($publisherName) {
     return $query->isExistByName($publisherName);
 }
 
-function isExistPublisherCode($isbn) {
+function isExistPublisherCode($isbn13) {
     $query = new PublisherQuery();
-    return $query->isExistByIsbnCode($isbn);
+    return $query->isExistByIsbnCode($isbn13);
 }
 
-function resisterPublisherWhenPublisherIsNotExist($isbn, $publisherName) {
+function resisterPublisherWhenPublisherIsNotExist($isbn13, $publisherName) {
     $command = new PublisherCommand();
-    $command->resisterPublisher($isbn, $publisherName);
+    $command->resisterPublisher($isbn13, $publisherName);
 }
 
 function makeAuthorList($authors) {
