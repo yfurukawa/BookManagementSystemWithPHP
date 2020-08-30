@@ -12,11 +12,11 @@
 		            event.preventDefault();
 		            //初期化
 		            $("#ajax_result").empty();
-		
+
 		            sendIsbn();
 	            });
             });
- 
+
             function sendIsbn(){
  	            var isbn_val=$("#isbn_id").val();  
  	
@@ -36,8 +36,7 @@
 	            })
 	            .always(function(jqXHR, status){
 		            console.log(status);
-	            });
- 
+	            }); 
             }
         </script>
     </head>
@@ -48,14 +47,15 @@
         </div>
 
         <div class="resisterBook">
-            <form name="resister" method="POST" action="ResisterBook.php">
+            <form name="resister" method="POST" action="RegistBook.php">
                 <table>
-                    <tr><th>ISBN : </th><td><input type="text" name="isbn" id="isbn_id"></td><td><input type="submit" value="検索" id="submit_bt" /></td></tr>
+                    <tr><th>ISBN : 978-</th><td><input type="text" name="isbn" id="isbn_id"></td>
+                    <td><input type="submit" value="検索" id="submit_bt" /></td></tr>
                 </table>
                 <div id="ajax_result">
                     <table>
-                        <tr><th>タイトル : </th><td><input type="text"     name="title"></td></tr>
-                        <tr><th>説明 :     </th><td><input type="textarea" name="description"></td></tr>
+                        <tr><th>タイトル : </th><td><input type="text"     name="title" id="title"></td></tr>
+                        <tr><th>説明 :     </th><td><input type="textarea" name="description" id="description"></td></tr>
                         <tr><th>出版社 : </th>
                             <td>
                                 <?php
@@ -69,15 +69,15 @@
                         <tr><th>保管場所</th>
                             <td>
                                 <?php
-                                    require_once('/var/www/php_libs/class/RoomCombobox.php');//FWLOT3
+                                    require_once('/var/www/php_libs/class/RoomCombobox.php');
                                     print((new RoomCombobox())->createRoomCombobox());
                                 ?>
                             </td>
                         </tr>
-                        <tr><th>タグ</th><td><input type="text" name="tags"></td></tr>
+                        <tr><th>タグ</th><td><input type="text" name="tags" id="tags"></td></tr>
                     </table>
                 </div>
-              <input type="submit" value="登録">
+              <input type="submit" value="登録" id="regist_bt" />
             </form>
         </div>
     </body>
