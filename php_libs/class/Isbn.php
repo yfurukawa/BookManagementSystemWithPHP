@@ -29,7 +29,7 @@ class Isbn {
         list($this->prefix, $this->groupCode, $this->publisherCode, $this->issueCode, $this->checkdigit) = explode('-', $this->isbn13);
     }
 
-    /** ISBN13を返す
+    /** ハイフン無しのISBN13を返す
      * @param なし
      * @return ISBN13
      */
