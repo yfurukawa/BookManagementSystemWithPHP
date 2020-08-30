@@ -41,7 +41,9 @@ class BookQuery {
         $stmh->bindValue(':isbn', $isbn);
         $stmh->execute();
 
-        if ($stmh->rowCount() >= 1) {
+        $count = $stmh->fetch(PDO::FETCH_NUM);
+
+        if ($count[0] >= 1) {
             return true;
         }
         else {
