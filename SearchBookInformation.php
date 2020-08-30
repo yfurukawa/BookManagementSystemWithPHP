@@ -1,4 +1,6 @@
 <?php
+// GoogleでISBN13の番号をキーに書籍情報を検索する
+// 必要な情報のすべてが検索できる訳ではない
 
 require_once('/var/www/php_libs/class/repository/BookInformationSearcherWithGoogle.php');
 require_once('/var/www/php_libs/class/repository/BookQuery.php');
@@ -6,6 +8,7 @@ require_once('/var/www/php_libs/class/repository/PublisherQuery.php');
 require_once('/var/www/php_libs/class/repository/PublisherCommand.php');
 require_once('/var/www/php_libs/class/PublisherCombobox.php');
 require_once('/var/www/php_libs/class/RoomCombobox.php');
+
 
 $isbn = $_POST['isbn'];
 
