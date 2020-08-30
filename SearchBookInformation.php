@@ -10,7 +10,7 @@ require_once('/var/www/php_libs/class/PublisherCombobox.php');
 require_once('/var/www/php_libs/class/RoomCombobox.php');
 
 
-$isbn = $_POST['isbn'];
+$isbn = parseIsbn();
 
 if(isExistBook($isbn)) {
     echo "既に登録済みです";
@@ -43,6 +43,21 @@ $contents .= "</table>";
 
 echo $contents;
 
+/** Webページから渡されるISBN番号は、接頭記号が含まれていないのと
+ *  -（ハイフン）で各パートが区切られているので、パースするとともに、
+ *  -（ハイフン）なしのISBN番号を作る
+ * @param なし
+ * @return ISBN13番号
+ */
+function parseIsbn() {
+    list($groupCode, $publisherCode, $issueCode, $checkdigit) = explode('-', $_POST['isbn']);
+    return '978'.$groupCode.$publisherCode.$issueCode.$checkdigit;
+}
+
+/** 書籍の登録有無を確認する
+ * @param $isbn 問い合わせるISBN13番号
+ * @return 問い合わせ結果（登録済み：true、未登録：false）
+ */
 function isExistBook($isbn) {
     $query = new BookQuery();
     return $query->isExist($isbn);
