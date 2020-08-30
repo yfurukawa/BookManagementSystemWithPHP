@@ -45,4 +45,12 @@ class Isbn {
         $query = new BookQuery();
         return $query->isExist($this->isbn13);
     }
+
+    /** 出版社コードを返す
+     * @param なし
+     * @return 出版社コード
+     */
+    public function publisherCode() {
+        return $this->publisherCode;
+    }
 }
