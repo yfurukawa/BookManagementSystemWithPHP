@@ -43,7 +43,7 @@ class Isbn {
      */
     function isExistBook() {
         $query = new BookQuery();
-        return $query->isExist($this->isbn13);
+        return $query->isExist($this->toIsbn13());
     }
 
     /** 出版社コードを返す
