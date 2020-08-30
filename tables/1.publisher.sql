@@ -3,7 +3,7 @@ DROP TABLE BookManage.publisher;
 CREATE TABLE BookManage.publisher (
   publisherId SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   publisherName varchar(100),
-  publisherCode varchar(7)
+  publisherCode varchar(7) UNIQUE
 );
 
 CREATE INDEX publisherId_index ON BookManage.publisher(publisherId);
