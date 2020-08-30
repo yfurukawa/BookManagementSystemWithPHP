@@ -11,7 +11,7 @@
         </div>
         
         <div class="searchPublisher">
-            <form name="search" method="POST" action="php_libs/class/BookListController.php">
+            <form name="search" method="POST" action="BookListController.php">
               <table>
                 <tr>
                   <td>タイトル</td><td>出版社</td><td>保管場所</td><td>タグ</td>
@@ -26,7 +26,7 @@
                   </td>
                   <td>
                     <?php
-                      require_once('/var/www/php_libs/class/RoomCombobox.php');//FWLOT3
+                      require_once('/var/www/php_libs/class/RoomCombobox.php');
                       print((new RoomCombobox())->createRoomCombobox());
                     ?>
                   </td>
