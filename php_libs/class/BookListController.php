@@ -12,7 +12,8 @@ class BookListController {
         //$sql = "SELECT b.isbn, title, description, publisherName, authorName, thumbnail, roomName FROM book as b, author as a, room as r, publisher as p WHERE b.isbn = 
         //a.isbn and b.roomId = r.roomId and b.publisherId = p.publisherId";
         
-        $sql = "SELECT isbn, title, description, thumbnail From book";
+        $sql  = "SELECT isbn, title, publisherName, description, thumbnail From book as b, publisher as p ";
+        $sql .= "WHERE b.publisherId = p.publisherId";
 
         $stmh = $connector->prepare($sql);
         $stmh->execute();
@@ -22,9 +23,9 @@ class BookListController {
         }
         else {
             while($row = $stmh->fetch(PDO::FETCH_ASSOC)) {
-                $pubs = $pubs."<tr><td>".$row['title']."</td><td>".$row['isbn']."</td><td>".$row['description'].'</td><td><img src="'.$row['thumbnail'].'"></td></tr>';
+                $pubs = $pubs."<tr><td>".$row['title']."</td><td>".$row['isbn']."</td><td>".$row['publisherName']."</td><td>".$row['description'].'</td><td><img src="'.$row['thumbnail'].'"></td><td>'.$row['roomName']."</td></tr>";
             }
-            $contents = '<table border="2"><tbody><tr><th>書籍名称</th><th>ISBN</th><th>説明</th><th></th></tr>';
+            $contents = '<table border="2"><tbody><tr><th>書籍名称</th><th>ISBN</th><th>出版社</th><th>説明</th><th></th><th>保管場所</th></tr>';
             $contents = $contents.$pubs;
             $contents = $contents."</tbody></table>";
             print $contents;
