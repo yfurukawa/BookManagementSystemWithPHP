@@ -5,7 +5,7 @@ require_once('DbConnector.php');
 class PublisherCommand {
     private $c = "";
 
-    public function resisterPublisher($isbn, $publisherName) {
+    public function registPublisher($isbn, $publisherName) {
         $c = new DbConnector();
         $connector = $c->connectDb();
         
