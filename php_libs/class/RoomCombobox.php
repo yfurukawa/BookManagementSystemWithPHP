@@ -6,7 +6,7 @@ class RoomCombobox {
     public function createRoomCombobox() {
         $roomQuery = new RoomQuery();
         $rooms = $roomQuery->roomListup();
-        $contents = '<select name="roomId" id="roomId>';
+        $contents = '<select name="roomId" id="room_id">';
 
         foreach($rooms as $room) {
             $contents = $contents.'<option value="'.$room['roomId'].'">'.$room['roomName'].'</option>';
