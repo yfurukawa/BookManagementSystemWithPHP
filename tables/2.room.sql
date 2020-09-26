@@ -7,6 +7,7 @@ CREATE TABLE BookManage.room (
 
 CREATE INDEX roomId_index ON BookManage.room(roomId);
 
+INSERT INTO BookManage.room (roomName) VALUES ("N/A");
 INSERT INTO BookManage.room (roomName) VALUES ("書斎　東本棚（右）");
 INSERT INTO BookManage.room (roomName) VALUES ("書斎　東本棚（左）");
 INSERT INTO BookManage.room (roomName) VALUES ("書斎　南本棚");
