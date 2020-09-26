@@ -19,14 +19,18 @@
 
             function searchBook(){
               console.warn("SearchBook");
-               var title_val=$("#title").val();  
-               var tags_val=$("tags").val();
+               var title_val=$("#title").val();
+               var publisher_val=$("#publisherName").val();
+               var room_val=$("#room_id").val();
+               var tags_val=$("#tags").val();
  	
 	            $.ajax({
 		            type: 'POST',
-		            url: './SearchBookInformation.php',  // FIXME ここは書籍の絞り込みスクリプトに変更する
+		            url: './FilterBook.php',  // FIXME ここは書籍の絞り込みスクリプトに変更する
 		            data:{
                   title:title_val,
+                  publisherId:publisher_val,
+                  roomId:room_val,
                   tags:tags_val
 		            },
 		            dataType: 'html',
@@ -80,13 +84,13 @@
             <div class="listTitle">
                 書籍一覧<br>
             </div>
-            <div id="ajax_result">
-              <div class="bookList">
+            <div class="bookList">
+              <div id="ajax_result">
                 <?php
                     define('_ROOT_DIR',__DIR__.'/');
                     require_once('/var/www/php_libs/init.php');
                     $bookList = new BookListController();
-                    $bookList->listBook();
+                    $bookList->listBookAll();
                 ?>
               </div>
             </div>
