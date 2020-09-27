@@ -37,9 +37,9 @@ class BookListController {
         }
         else {
             while($row = $stmh->fetch(PDO::FETCH_ASSOC)) {
-                $pubs = $pubs."<tr><td>".$row['title']."</td><td>".$row['isbn']."</td><td>".$row['publisherName']."</td><td>".$row['author']."</td><td>".$row['description'].'</td><td><img src="'.$row['thumbnail'].'"></td><td>'.$row['roomName']."</td><td>".$row['tags']."</td></tr>";
+                $pubs = $pubs."<tr><td>".$row['title']."</td><td>".$row['isbn']."</td><td>".$row['publisherName']."</td><td>".$row['author']."</td><td>".$row['description'].'</td><td><img src="'.$row['thumbnail'].'"></td><td>'.$row['roomName']."</td><td>".$row['tags']."</td><td><a href=\"UpdatePage.php?idbn=".$row['isbn']."\">更新</a></td></tr>";
             }
-            $contents = '<table border="2"><tbody><tr><th>書籍名称</th><th>ISBN</th><th>出版社</th><th>著者</th><th>説明</th><th>サムネイル</th><th>保管場所</th><th>タグ</th></tr>';
+            $contents = '<table border="2"><tbody><tr><th>書籍名称</th><th>ISBN</th><th>出版社</th><th>著者</th><th>説明</th><th>サムネイル</th><th>保管場所</th><th>タグ</th><th></th></tr>';
             $contents = $contents.$pubs;
             $contents = $contents."</tbody></table>";
             print $contents;
