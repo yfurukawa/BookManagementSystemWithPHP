@@ -3,18 +3,22 @@
 class BookInformation {
     private $isbn;
     private $title;
+    private $author;
     private $description;
     private $publisherId;
     private $thumbnail;
     private $roomId;
+    private $tags;
 
-    function __construct($isbn, $title, $description, $publisherId, $thumbnail, $roomId) {
-        $this->isbn = $isbn;
-        $this->title = $title;
+    function __construct($isbn, $title, $author, $description, $publisherId, $thumbnail, $roomId, $tags) {
+        $this->isbn        = $isbn;
+        $this->title       = $title;
+        $this->author      = $author;
         $this->description = $description;
         $this->publisherId = $publisherId;
-        $this->thumbnail = $thumbnail;
-        $this->roomId = $roomId;
+        $this->thumbnail   = $thumbnail;
+        $this->roomId      = $roomId;
+        $this->tags        = $tags;
     }
 
     function getIsbn() {
@@ -25,12 +29,12 @@ class BookInformation {
         return $this->title;
     }
 
-    function getDescription() {
-        return $this->description;
+    function getAuthor() {
+        return $this->author;
     }
 
-    function getAuthors() {
-        return $this->authors;
+    function getDescription() {
+        return $this->description;
     }
 
     function getPublisherId() {
@@ -43,5 +47,9 @@ class BookInformation {
 
     function getRoomId() {
         return $this->roomId;
+    }
+
+    function getTags() {
+        return $this->tags;
     }
 }
