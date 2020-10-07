@@ -22,8 +22,6 @@
     $publisherName = "T.B.D.";
   }
 
-  $tags = $_POST['tags'];
- 
   $isbn = new Isbn($_POST['isbn']);
   $publisher = new Publisher($isbn, $publisherName);
 
@@ -31,9 +29,7 @@
   if(!$publisher->isExistPublisherCode()) {
     $publisherId = $publisher->registPublisher();
   }
-  
-
-  
+    
   if($publisherId == NULL) {
     $publisherCommand = new PublisherCommand();
     $publisherCommand->registPublisher($isbn->publisherCode(), $publisherName);
@@ -47,10 +43,6 @@
   // タグのIDとISBN番号をマップに登録する
 
   // 書籍情報を登録する
-  $bookInformation = new BookInformation($isbn->toIsbn13(), $_POST['title'], $_POST['description'], $publisherId, $_POST['thumbnail'], $_POST['roomId']);
+  $bookInformation = new BookInformation($isbn->toIsbn13(), $_POST['title'], $_POST['authors'], $_POST['description'], $publisherId, $_POST['thumbnail'], $_POST['roomId'], $_POST['tags']);
   $bookCommand = new BookCommand();
   $bookCommand->resisterBook($bookInformation);
-
-  // 著者を登録する
-  $authorCommand = new AuthorCommand();
-  $authorCommand->resisterAuthor($_POST['isbn'], explode(',', $_POST['authors']));
