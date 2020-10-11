@@ -18,22 +18,24 @@ class Publisher {
      * @return コンボボックスのhtmlコード
      */
     public function makePublisherCombobox() {
-        $combobox = new PublisherCombobox();
-    
+
         // Googleで検索できず、DBにも登録されていない場合には
         // 新規登録するためにテキストボックスを表示する
         if($this->isPublisherNameNull() && !$this->isExistPublisherCode()) {
             return '<input type="text" name="publisherName">';
         }
+        // Googleで検索できないが、DBには登録されている場合には
+        // その情報を元にコンボボックスをつくる
         elseif($this->isPublisherNameNull() && $this->isExistPublisherCode()) {
             $query = new PublisherQuery();
-            $combobox->createPublisherComboboxWithSelected($query->getPublisherNameWithCode($this->isbn->publisherCode()));
+            $combobox = new PublisherCombobox();
+            return $combobox->createPublisherComboboxWithSelected($query->getPublisherNameWithCode($this->isbn->publisherCode()));
         }
-    /*
-        if(!$this->isExistPublisherName()) {
-            $this->registPublisher($this->searchedPublisherName, $this->searchedPublisherName);
+        // Googleで検索できたが、DBに登録されていない場合は、当該出版社をDBに登録する
+        elseif(!$this->isExistPublisherName()) {
+            $this->registPublisher();
         }
-        */
+        $combobox = new PublisherCombobox();
         return $combobox->createPublisherComboboxWithSelected($this->searchedPublisherName);
     }
 
@@ -57,7 +59,7 @@ class Publisher {
     
     /** 出版社名が渡されているか確認する
      * @param なし
-     * @return 結果（渡されている：true、渡されていない：false）
+     * @return 結果（渡されていない：true、渡されている：false）
      */
     public function isPublisherNameNull() {
         return is_null($this->searchedPublisherName);
@@ -69,10 +71,11 @@ class Publisher {
      */
     public function registPublisher() {
         $command = new PublisherCommand();
-        $command->registPublisher($this->isbn->publisherCode(), $this->searchedPublisherName);
-
-        $query = new PublisherQuery();
-        return $query->getPublisherIdWithName($this->searchedPublisherName);
+        $command->registPublisher($this->isbn, $this->searchedPublisherName);
+        return $this->isbn->publisherCode();
     }
 
+    public function getPublisherName() {
+        return $this->searchedPublisherName;
+    }
 }

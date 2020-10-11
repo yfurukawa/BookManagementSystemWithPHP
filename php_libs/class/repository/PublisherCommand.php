@@ -15,7 +15,7 @@ class PublisherCommand {
 
             $stmh = $connector->prepare($sql);
             $stmh->bindValue(':publisherName', $publisherName);
-            $stmh->bindValue(':publisherCode', substr($isbn, 4, 4));
+            $stmh->bindValue(':publisherCode', $isbn->publisherCode());
             $stmh->execute();
             $connector->commit();
             return "データを".$stmh->rowCount()."件　登録しました";

@@ -26,10 +26,12 @@
   $publisher = new Publisher($isbn, $publisherName);
 
   // 出版社がDBにない場合、新規登録してIDを取得する
+  /*
   if(!$publisher->isExistPublisherCode()) {
     $publisherId = $publisher->registPublisher();
   }
-    
+  */
+  
   if($publisherId == NULL) {
     $publisherCommand = new PublisherCommand();
     $publisherCommand->registPublisher($isbn->publisherCode(), $publisherName);
