@@ -2,6 +2,7 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/index.css">
         <title>書籍管理</title>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
         
@@ -45,6 +46,10 @@
         <div class="pageTitle">
             書籍登録
         </div>
+        
+        <?php
+            include('./menu.php');
+        ?>
 
         <div class="resisterBook">
             <form name="resister" method="POST" action="RegistBook.php">
