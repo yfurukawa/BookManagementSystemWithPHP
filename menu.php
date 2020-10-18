@@ -1,12 +1,5 @@
 <?php
     $menu = <<<EOM
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/index.css">
-        <title>書籍管理</title>
-    </head>
-
-    <body>
         <nav>
             <ul>
             <li class="current"><a href="#">Home</a></li>
@@ -16,7 +9,6 @@
             <li><a href="RegistrationPage.php">書籍登録</a></li>
             </ul>
         </nav>
-    </body>
     EOM;
 
     echo $menu;
