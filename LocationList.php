@@ -13,6 +13,7 @@
         </div>
         
         <?php
+            $locationList = "current";
             include('./menu.php');
         ?>
 

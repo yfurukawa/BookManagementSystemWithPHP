@@ -55,6 +55,7 @@
       </div>
 
       <?php
+        $bookList = "current";
         include('./menu.php');
       ?>
 

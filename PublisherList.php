@@ -13,6 +13,7 @@
         </div>
         
         <?php
+            $publisherList = "current";
             include('./menu.php');
         ?>
 

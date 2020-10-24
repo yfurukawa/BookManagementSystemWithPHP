@@ -49,6 +49,7 @@
         </div>
         
         <?php
+            $register = "current";
             include('./menu.php');
         ?>
 
