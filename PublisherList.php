@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/menu.css">
         <title>書籍管理</title>
     </head>
 
